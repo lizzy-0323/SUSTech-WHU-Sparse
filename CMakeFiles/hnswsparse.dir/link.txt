@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -Ofast -lrt -DNDEBUG -std=c++11 -DHAVE_CXX0X -march=native -fpic -w -fopenmp -ftree-vectorize -ftree-vectorizer-verbose=0 -flto -shared  -o hnswsparse.cpython-38-x86_64-linux-gnu.so CMakeFiles/hnswsparse.dir/python/hnswsparse.cpp.o 

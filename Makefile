@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lzy/code/nips23/sparse/hnswlib
+CMAKE_SOURCE_DIR = /home/lzy/code/nips23/sparse/SUSTech-WHU-Sparse
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lzy/code/nips23/sparse/hnswlib
+CMAKE_BINARY_DIR = /home/lzy/code/nips23/sparse/SUSTech-WHU-Sparse
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lzy/code/nips23/sparse/hnswlib/CMakeFiles /home/lzy/code/nips23/sparse/hnswlib//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lzy/code/nips23/sparse/SUSTech-WHU-Sparse/CMakeFiles /home/lzy/code/nips23/sparse/SUSTech-WHU-Sparse//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lzy/code/nips23/sparse/hnswlib/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lzy/code/nips23/sparse/SUSTech-WHU-Sparse/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,78 +117,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named search
+# Target rules for targets named hnswsparse
 
 # Build rule for target.
-search: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 search
-.PHONY : search
+hnswsparse: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 hnswsparse
+.PHONY : hnswsparse
 
 # fast build rule for target.
-search/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/search.dir/build.make CMakeFiles/search.dir/build
-.PHONY : search/fast
+hnswsparse/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hnswsparse.dir/build.make CMakeFiles/hnswsparse.dir/build
+.PHONY : hnswsparse/fast
 
-#=============================================================================
-# Target rules for targets named build
-
-# Build rule for target.
-build: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 build
-.PHONY : build
-
-# fast build rule for target.
-build/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/build.dir/build.make CMakeFiles/build.dir/build
-.PHONY : build/fast
-
-expr/build.o: expr/build.cpp.o
-.PHONY : expr/build.o
+python/hnswsparse.o: python/hnswsparse.cpp.o
+.PHONY : python/hnswsparse.o
 
 # target to build an object file
-expr/build.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/build.dir/build.make CMakeFiles/build.dir/expr/build.cpp.o
-.PHONY : expr/build.cpp.o
+python/hnswsparse.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hnswsparse.dir/build.make CMakeFiles/hnswsparse.dir/python/hnswsparse.cpp.o
+.PHONY : python/hnswsparse.cpp.o
 
-expr/build.i: expr/build.cpp.i
-.PHONY : expr/build.i
-
-# target to preprocess a source file
-expr/build.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/build.dir/build.make CMakeFiles/build.dir/expr/build.cpp.i
-.PHONY : expr/build.cpp.i
-
-expr/build.s: expr/build.cpp.s
-.PHONY : expr/build.s
-
-# target to generate assembly for a file
-expr/build.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/build.dir/build.make CMakeFiles/build.dir/expr/build.cpp.s
-.PHONY : expr/build.cpp.s
-
-expr/search.o: expr/search.cpp.o
-.PHONY : expr/search.o
-
-# target to build an object file
-expr/search.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/search.dir/build.make CMakeFiles/search.dir/expr/search.cpp.o
-.PHONY : expr/search.cpp.o
-
-expr/search.i: expr/search.cpp.i
-.PHONY : expr/search.i
+python/hnswsparse.i: python/hnswsparse.cpp.i
+.PHONY : python/hnswsparse.i
 
 # target to preprocess a source file
-expr/search.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/search.dir/build.make CMakeFiles/search.dir/expr/search.cpp.i
-.PHONY : expr/search.cpp.i
+python/hnswsparse.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hnswsparse.dir/build.make CMakeFiles/hnswsparse.dir/python/hnswsparse.cpp.i
+.PHONY : python/hnswsparse.cpp.i
 
-expr/search.s: expr/search.cpp.s
-.PHONY : expr/search.s
+python/hnswsparse.s: python/hnswsparse.cpp.s
+.PHONY : python/hnswsparse.s
 
 # target to generate assembly for a file
-expr/search.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/search.dir/build.make CMakeFiles/search.dir/expr/search.cpp.s
-.PHONY : expr/search.cpp.s
+python/hnswsparse.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hnswsparse.dir/build.make CMakeFiles/hnswsparse.dir/python/hnswsparse.cpp.s
+.PHONY : python/hnswsparse.cpp.s
 
 # Help Target
 help:
@@ -198,14 +161,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... build"
-	@echo "... search"
-	@echo "... expr/build.o"
-	@echo "... expr/build.i"
-	@echo "... expr/build.s"
-	@echo "... expr/search.o"
-	@echo "... expr/search.i"
-	@echo "... expr/search.s"
+	@echo "... hnswsparse"
+	@echo "... python/hnswsparse.o"
+	@echo "... python/hnswsparse.i"
+	@echo "... python/hnswsparse.s"
 .PHONY : help
 
 

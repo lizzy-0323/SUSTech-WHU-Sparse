@@ -7,7 +7,6 @@ int main() {
     unsigned* gt = read_gt("../../data/base_full.dev.gt");
     size_t nd = dataset.nrow;
     size_t nq = queries.nrow;
-    // std::cout<<"nd: "<<nd<<" nq: "<<nq<<"\n";
     hnswlib::HierarchicalNSW<float>* alg_hnsw = new hnswlib::HierarchicalNSW<float>("M20_ef1200.hnsw");
     alg_hnsw->dataset = &dataset;
     alg_hnsw->queries = &queries;
