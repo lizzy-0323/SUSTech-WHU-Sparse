@@ -13,3 +13,4 @@ var/
 .vs/
 data/
 **.DS_Store
+*.so
