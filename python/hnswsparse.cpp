@@ -65,16 +65,15 @@ void build_index(const char* index_fn, unsigned nrow, py::array_t<size_t> indptr
     SparseStorage dataset = SparseStorage(indptr, indices, data, nrow);
 
     unsigned n =dataset.nrow;
-    // hnswlib::HierarchicalNSW<float>* alg_hnsw = new hnswlib::HierarchicalNSW<float>(n, 19, 1200);
     hnswlib::HierarchicalNSW<float>* alg_hnsw = new hnswlib::HierarchicalNSW<float>(n, M,ef);
     alg_hnsw->dataset = &dataset;
-
     // unsigned nz_count = getNzCount(alg_hnsw->dataset);
     // alg_hnsw->getNzGtCount();
     alg_hnsw->build();
     std::cout<<"Build done"<<std::endl;
     alg_hnsw->saveIndex(index_fn);
-    delete alg_hnsw;
+    std::cout<<"Save index success"<<std::endl;
+    // delete alg_hnsw;
     // return nz_count;
 }
 
