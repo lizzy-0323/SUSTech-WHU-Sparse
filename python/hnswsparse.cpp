@@ -2,7 +2,6 @@
 #include"../hnswlib/hnswlib.h"
 #include"../hnswlib/sparse_storage.h"
 #include"../hnswlib/utils.h"
-#include <omp.h>
 #undef max
 
 #include <pybind11/pybind11.h>
@@ -50,21 +49,13 @@ public:
 
     }
 private:
-    hnswlib::HierarchicalNSW<float>* alg_hnsw = nullptr;
+    hnswlib::HierarchicalNSW<float>* alg_hnsw;
 };
 
-void build_index(const char* index_fn, unsigned nrow, py::array_t<size_t> indptr_, py::array_t<unsigned> indices_, py::array_t<float> data_,unsigned M, unsigned ef){
-
-    py::buffer_info buf_info_indptr = indptr_.request();
-    size_t* indptr = (size_t*)buf_info_indptr.ptr;
-    py::buffer_info buf_info_indices = indices_.request();
-    unsigned* indices = (unsigned*)buf_info_indices.ptr;
-    py::buffer_info buf_info_data = data_.request();
-    float* data = (float*)buf_info_data.ptr;
-    SparseStorage dataset = SparseStorage(indptr, indices, data, nrow);
-
-    unsigned n =dataset.nrow;
-    hnswlib::HierarchicalNSW<float>* alg_hnsw = new hnswlib::HierarchicalNSW<float>(n, M,ef);
+void build_index(const char* index_fn, const char *dataset_fn, unsigned M, unsigned ef){
+    SparseStorage dataset = read_csr(dataset_fn);
+    size_t nd =dataset.nrow;
+    hnswlib::HierarchicalNSW<float>* alg_hnsw = new hnswlib::HierarchicalNSW<float>(nd, M, ef);
     alg_hnsw->dataset = &dataset;
     // unsigned nz_count = getNzCount(alg_hnsw->dataset);
     // alg_hnsw->getNzGtCount();
@@ -72,7 +63,7 @@ void build_index(const char* index_fn, unsigned nrow, py::array_t<size_t> indptr
     std::cout<<"Build done"<<std::endl;
     alg_hnsw->saveIndex(index_fn);
     std::cout<<"Save index success"<<std::endl;
-    // delete alg_hnsw;
+    delete alg_hnsw;
     // return nz_count;
 }
 

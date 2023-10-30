@@ -12,5 +12,7 @@ var/
 .vscode/
 .vs/
 data/
+CMakeFiles/
+CMakeCache.txt
 **.DS_Store
 *.so

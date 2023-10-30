@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -Dhnswsparse_EXPORTS
 
-CXX_INCLUDES = -isystem /home/lzy/code/nips23/sparse/SUSTech-WHU-Sparse/pybind11/include -isystem /home/lzy/miniconda3/include/python3.8
+CXX_INCLUDES = -isystem /home/userdata/lzy/code/nips23/sparse/SUSTech-WHU-Sparse/pybind11/include -isystem /home/lzy/miniconda3/envs/nips23/include/python3.8
 
 CXX_FLAGS = -Ofast -lrt -DNDEBUG -std=c++11 -DHAVE_CXX0X -march=native -fpic -w -fopenmp -ftree-vectorize -ftree-vectorizer-verbose=0 -std=gnu++11 -fPIC -fvisibility=hidden -flto -fno-fat-lto-objects
 

@@ -1471,7 +1471,6 @@ namespace hnswlib
                     }
                 }
             }
-
             std::priority_queue<std::pair<dist_t, tableint>, std::vector<std::pair<dist_t, tableint>>, CompareByFirst> top_candidates;
             if (num_deleted_)
             {

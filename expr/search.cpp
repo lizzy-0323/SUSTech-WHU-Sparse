@@ -2,18 +2,19 @@
 #include "../hnswlib/utils.h"
 
 int main() {
-    SparseStorage dataset = read_csr("../../data/base_full.csr");
-    SparseStorage queries = read_csr("../../data/queries.dev.csr");
-    unsigned* gt = read_gt("../../data/base_full.dev.gt");
+    SparseStorage dataset = read_csr("../../data/base_small.csr");
+    SparseStorage queries = read_csr("../../data/queries_small.dev.csr");
+    unsigned* gt = read_gt("../../data/base_small.dev.gt");
     size_t nd = dataset.nrow;
     size_t nq = queries.nrow;
-    hnswlib::HierarchicalNSW<float>* alg_hnsw = new hnswlib::HierarchicalNSW<float>("M20_ef1200.hnsw");
+    std::cout<<"读取数据成功"<<std::endl;
+    hnswlib::HierarchicalNSW<float>* alg_hnsw = new hnswlib::HierarchicalNSW<float>("M20_ef200.hnsw");
     alg_hnsw->dataset = &dataset;
     alg_hnsw->queries = &queries;
-    alg_hnsw->nz_count = getNzCount(alg_hnsw->dataset);
+    // alg_hnsw->nz_count = getNzCount(alg_hnsw->dataset);
     Timer timer;
-    std::ifstream in("probility.txt");
-    alg_hnsw->preFetching(in);
+    // std::ifstream in("probility.txt");
+    // alg_hnsw->preFetching(in);
     timer.tick();
     std::vector<std::priority_queue<std::pair<float, size_t>>> knn(nq);
     alg_hnsw->setEf(32);
