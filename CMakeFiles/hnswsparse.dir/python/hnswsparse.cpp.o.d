@@ -276,6 +276,7 @@ CMakeFiles/hnswsparse.dir/python/hnswsparse.cpp.o: \
  /usr/include/c++/9/bits/unordered_set.h /usr/include/c++/9/list \
  /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
+ /usr/lib/gcc/x86_64-linux-gnu/9/include/omp.h \
  /home/lzy/code/nips23/sparse/SUSTech-WHU-Sparse/pybind11/include/pybind11/pybind11.h \
  /home/lzy/code/nips23/sparse/SUSTech-WHU-Sparse/pybind11/include/pybind11/detail/class.h \
  /home/lzy/code/nips23/sparse/SUSTech-WHU-Sparse/pybind11/include/pybind11/attr.h \

@@ -453,14 +453,15 @@ namespace hnswlib
             std::priority_queue<std::pair<dist_t, tableint>, std::vector<std::pair<dist_t, tableint>>, CompareByFirst> candidate_set;
 
             dist_t lowerBound;
-            // 如果该点被预采样，则直接将该点加入到候选集中
-            if (pre_sample.count(ep_id) > 0){
-                lowerBound= std::numeric_limits<dist_t>::max();
-                // metric_distance_computations--;
-                top_candidates.emplace(lowerBound, ep_id);
-                candidate_set.emplace(-lowerBound, ep_id);
-                // lowerBound = inner_prod(dataset, getExternalLabel(ep_id), queries, query_id);
-            }else if ((!has_deletions || !isMarkedDeleted(ep_id)) && ((!isIdAllowed) || (*isIdAllowed)(getExternalLabel(ep_id)))){
+            // // 如果该点被预采样，则直接将该点加入到候选集中
+            // if (pre_sample.count(ep_id) > 0){
+            //     lowerBound= std::numeric_limits<dist_t>::max();
+            //     // metric_distance_computations--;
+            //     top_candidates.emplace(lowerBound, ep_id);
+            //     candidate_set.emplace(-lowerBound, ep_id);
+            //     // lowerBound = inner_prod(dataset, getExternalLabel(ep_id), queries, query_id);
+            // }else 
+            if ((!has_deletions || !isMarkedDeleted(ep_id)) && ((!isIdAllowed) || (*isIdAllowed)(getExternalLabel(ep_id)))){
                 dist_t dist = inner_prod(dataset, getExternalLabel(ep_id), queries, query_id);
                 lowerBound = dist;
                 top_candidates.emplace(dist, ep_id);
@@ -483,14 +484,6 @@ namespace hnswlib
                 tableint current_node_id = current_node_pair.second;
                 int *data = (int *)get_linklist0(current_node_id);
                 size_t size = getListCount((linklistsizeint *)data);
-                // 计算non-zero和distance分布
-                // for (size_t j = 0; j < size; j++){
-                //     tableint id = *(data + j + 1);
-                //     int i = getExternalLabel(id);
-                //     nonzero_distance_counter[nz_count[i]]++;
-                // }
-                // std::cout<<"current_node_id:"<<current_node_id<<" "<<"size:"<<size<<std::endl;
-                //                bool cur_node_deleted = isMarkedDeleted(current_node_id);
                 if (collect_metrics){
                     metric_hops++;
                     metric_distance_computations += size;

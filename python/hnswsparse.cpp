@@ -2,6 +2,7 @@
 #include"../hnswlib/hnswlib.h"
 #include"../hnswlib/sparse_storage.h"
 #include"../hnswlib/utils.h"
+#include <omp.h>
 #undef max
 
 #include <pybind11/pybind11.h>
@@ -11,32 +12,75 @@ using namespace py::literals;
 
 class HnswSparse{
 public:
-    HnswSparse(unsigned d,unsigned n,const char* index_fn):d(d){
-        hnswlib::HierarchicalNSW<float>* alg_hnsw = new hnswlib::HierarchicalNSW<float>(index_fn);
+    HnswSparse(const char* index_fn): alg_hnsw(nullptr) {
+        alg_hnsw = new hnswlib::HierarchicalNSW<float>(index_fn);
     }
-    py::array_t<unsigned> search(unsigned nq, py::array_t<float> query_, unsigned k, unsigned ef) {
-        // omp_set_num_threads(8);
-        // TODO:搜索函数
+    py::array_t<unsigned> search(unsigned nrow, py::array_t<size_t> indptr_, py::array_t<unsigned> indices_, py::array_t<float> data_, unsigned ef,unsigned k) {
+        omp_set_num_threads(8);
+        py::buffer_info buf_info_indptr = indptr_.request();
+        size_t* indptr = (size_t*)buf_info_indptr.ptr;
+        py::buffer_info buf_info_indices = indices_.request();
+        unsigned* indices = (unsigned*)buf_info_indices.ptr;
+        py::buffer_info buf_info_data = data_.request();
+        float* data = (float*)buf_info_data.ptr;
+        SparseStorage queries = SparseStorage(indptr, indices, data, nrow);
+        
+        alg_hnsw->queries = &queries;
+        // std::ifstream in("probility.txt");
+        // alg_hnsw->nz_count = nz_count;
+        // alg_hnsw->preFetching(in);
+        alg_hnsw->setEf(ef);
+
+        auto py_I = py::array_t<unsigned>(nrow * k);
+        py::buffer_info buf = py_I.request();
+        unsigned* I = (unsigned*)buf.ptr;
+        
+        // 大顶堆
+        std::priority_queue<std::pair<float, size_t>> tmp;
+        for (size_t i = 0; i < nrow; i++) { 
+            tmp = alg_hnsw->searchKnn(i, k);
+            for (size_t j = k-1; j >= 0; j--) {
+                I[i * k + j] = tmp.top().second;
+                tmp.pop();
+            }
+        }
+        
+        py_I.resize({nrow, k});
+        return py_I;
+        //timer.tuck("Search done");
+
     }
 private:
-    unsigned d;
+    hnswlib::HierarchicalNSW<float>* alg_hnsw = nullptr;
 };
 
-void build_index(const char* dataset_fn,const char* hnsw_fn,const char* index_fn,unsigned M,unsigned ef){
-    SparseStorage dataset = read_csr(dataset_fn);
+void build_index(const char* index_fn, unsigned nrow, py::array_t<size_t> indptr_, py::array_t<unsigned> indices_, py::array_t<float> data_,unsigned M, unsigned ef){
+
+    py::buffer_info buf_info_indptr = indptr_.request();
+    size_t* indptr = (size_t*)buf_info_indptr.ptr;
+    py::buffer_info buf_info_indices = indices_.request();
+    unsigned* indices = (unsigned*)buf_info_indices.ptr;
+    py::buffer_info buf_info_data = data_.request();
+    float* data = (float*)buf_info_data.ptr;
+    SparseStorage dataset = SparseStorage(indptr, indices, data, nrow);
+
     unsigned n =dataset.nrow;
-    hnswlib::HierarchicalNSW<float>* alg_hnsw = new hnswlib::HierarchicalNSW<float>(n, M, ef);
+    // hnswlib::HierarchicalNSW<float>* alg_hnsw = new hnswlib::HierarchicalNSW<float>(n, 19, 1200);
+    hnswlib::HierarchicalNSW<float>* alg_hnsw = new hnswlib::HierarchicalNSW<float>(n, M,ef);
     alg_hnsw->dataset = &dataset;
-    Timer timer;
-    timer.tick();
+
+    // unsigned nz_count = getNzCount(alg_hnsw->dataset);
+    // alg_hnsw->getNzGtCount();
     alg_hnsw->build();
-    timer.tuck("Build done");
+    std::cout<<"Build done"<<std::endl;
     alg_hnsw->saveIndex(index_fn);
+    delete alg_hnsw;
+    // return nz_count;
 }
 
 PYBIND11_MODULE(hnswsparse, m) {
     m.def("build_index", &build_index, "Build the index");
-    py::class_<HnswSparse>(m, "HnswSparse")
-        .def(py::init<unsigned, unsigned, const char*>())
-        .def("search", &HnswSparse::search, "search");
+    py::class_<HnswSparse>(m, "HnswSparse class")
+        .def(py::init<const char*>())
+        .def("search", &HnswSparse::search, "perform hnsw search");
 }
