@@ -4,7 +4,6 @@ project(hnsw_lib
 
 # add_library(hnswlib INTERFACE)
 # target_include_directories(hnswlib INTERFACE .)
-
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   set(CMAKE_CXX_STANDARD 11)
 
@@ -17,16 +16,13 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   endif()
 
   add_executable(search expr/search.cpp)
+
   # target_link_libraries(search hnswlib)
-
   add_executable(build expr/build.cpp)
-  # target_link_libraries(build_test hnswlib)
 
+  # target_link_libraries(build_test hnswlib)
   add_subdirectory(pybind11)
   pybind11_add_module(hnswsparse python/hnswsparse.cpp)
-<<<<<<< HEAD
+
   # target_link_libraries(hnswsparse hnswlib)
-=======
-  target_link_libraries(hnswsparse hnswlib)
->>>>>>> 083ce9a6268e7997bb76716af545fab027b020be
 endif()
