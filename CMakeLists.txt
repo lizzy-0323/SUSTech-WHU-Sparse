@@ -24,5 +24,9 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
   add_subdirectory(pybind11)
   pybind11_add_module(hnswsparse python/hnswsparse.cpp)
+<<<<<<< HEAD
   # target_link_libraries(hnswsparse hnswlib)
+=======
+  target_link_libraries(hnswsparse hnswlib)
+>>>>>>> 083ce9a6268e7997bb76716af545fab027b020be
 endif()

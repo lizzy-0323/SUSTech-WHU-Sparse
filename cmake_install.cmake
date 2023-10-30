@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Install script for directory: /home/userdata/lzy/code/nips23/sparse/SUSTech-WHU-Sparse
+=======
+# Install script for directory: /Users/liziyi/Code/pythondev/SUSTech-WHU-Sparse
+>>>>>>> 083ce9a6268e7997bb76716af545fab027b020be
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -27,11 +31,6 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
-# Install shared libraries without execute permission?
-if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
-  set(CMAKE_INSTALL_SO_NO_EXE "1")
-endif()
-
 # Is this installation the result of a crosscompile?
 if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
@@ -39,12 +38,16 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/usr/bin/objdump")
+  set(CMAKE_OBJDUMP "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/objdump")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
+<<<<<<< HEAD
   include("/home/userdata/lzy/code/nips23/sparse/SUSTech-WHU-Sparse/pybind11/cmake_install.cmake")
+=======
+  include("/Users/liziyi/Code/pythondev/SUSTech-WHU-Sparse/pybind11/cmake_install.cmake")
+>>>>>>> 083ce9a6268e7997bb76716af545fab027b020be
 
 endif()
 
@@ -56,5 +59,9 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
+<<<<<<< HEAD
 file(WRITE "/home/userdata/lzy/code/nips23/sparse/SUSTech-WHU-Sparse/${CMAKE_INSTALL_MANIFEST}"
+=======
+file(WRITE "/Users/liziyi/Code/pythondev/SUSTech-WHU-Sparse/${CMAKE_INSTALL_MANIFEST}"
+>>>>>>> 083ce9a6268e7997bb76716af545fab027b020be
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

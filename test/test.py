@@ -48,6 +48,9 @@ class Test(object):
         print("Index status: " + str(self.index))
 
     def search(self, X, k):
+        gt_fn = ""
+        data, indices, indptr, ncol = read_sparse_matrix_fields(gt_fn)
+        self.index.
         
     def load_index(self,index_n):
         pass
