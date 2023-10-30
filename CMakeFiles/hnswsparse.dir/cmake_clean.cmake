@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/hnswsparse.dir/python/hnswsparse.cpp.o"
   "CMakeFiles/hnswsparse.dir/python/hnswsparse.cpp.o.d"
-  "hnswsparse.cpython-38-x86_64-linux-gnu.so"
+  "hnswsparse.cpython-310-darwin.so"
   "hnswsparse.pdb"
 )
 

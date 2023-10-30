@@ -1,5 +1,5 @@
-/home/lzy/code/nips23/sparse/SUSTech-WHU-Sparse/CMakeFiles/hnswsparse.dir
-/home/lzy/code/nips23/sparse/SUSTech-WHU-Sparse/CMakeFiles/edit_cache.dir
-/home/lzy/code/nips23/sparse/SUSTech-WHU-Sparse/CMakeFiles/rebuild_cache.dir
-/home/lzy/code/nips23/sparse/SUSTech-WHU-Sparse/pybind11/CMakeFiles/edit_cache.dir
-/home/lzy/code/nips23/sparse/SUSTech-WHU-Sparse/pybind11/CMakeFiles/rebuild_cache.dir
+/Users/liziyi/Code/pythondev/SUSTech-WHU-Sparse/CMakeFiles/hnswsparse.dir
+/Users/liziyi/Code/pythondev/SUSTech-WHU-Sparse/CMakeFiles/edit_cache.dir
+/Users/liziyi/Code/pythondev/SUSTech-WHU-Sparse/CMakeFiles/rebuild_cache.dir
+/Users/liziyi/Code/pythondev/SUSTech-WHU-Sparse/pybind11/CMakeFiles/edit_cache.dir
+/Users/liziyi/Code/pythondev/SUSTech-WHU-Sparse/pybind11/CMakeFiles/rebuild_cache.dir

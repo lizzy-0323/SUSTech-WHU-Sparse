@@ -2,7 +2,6 @@
 #include"../hnswlib/hnswlib.h"
 #include"../hnswlib/sparse_storage.h"
 #include"../hnswlib/utils.h"
-#include <omp.h>
 #undef max
 
 #include <pybind11/pybind11.h>
