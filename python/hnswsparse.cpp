@@ -16,7 +16,6 @@ public:
         alg_hnsw = new hnswlib::HierarchicalNSW<float>(index_fn);
     }
     py::array_t<unsigned> search(unsigned nrow, py::array_t<size_t> indptr_, py::array_t<unsigned> indices_, py::array_t<float> data_, unsigned ef,unsigned k) {
-        omp_set_num_threads(8);
         py::buffer_info buf_info_indptr = indptr_.request();
         size_t* indptr = (size_t*)buf_info_indptr.ptr;
         py::buffer_info buf_info_indices = indices_.request();
@@ -79,7 +78,7 @@ void build_index(const char* index_fn, unsigned nrow, py::array_t<size_t> indptr
 
 PYBIND11_MODULE(hnswsparse, m) {
     m.def("build_index", &build_index, "Build the index");
-    py::class_<HnswSparse>(m, "HnswSparse class")
+    py::class_<HnswSparse>(m, "HnswSparse")
         .def(py::init<const char*>())
         .def("search", &HnswSparse::search, "perform hnsw search");
 }
