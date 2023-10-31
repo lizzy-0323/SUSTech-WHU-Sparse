@@ -1435,6 +1435,7 @@ namespace hnswlib
         std::priority_queue<std::pair<dist_t, labeltype>>
         searchKnn(labeltype query_id, size_t k, BaseFilterFunctor *isIdAllowed = nullptr) const
         {
+   
             std::priority_queue<std::pair<dist_t, labeltype>> result;
             if (cur_element_count == 0)
                 return result;

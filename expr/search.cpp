@@ -8,7 +8,7 @@ int main() {
     size_t nd = dataset.nrow;
     size_t nq = queries.nrow;
     std::cout<<"读取数据成功"<<std::endl;
-    hnswlib::HierarchicalNSW<float>* alg_hnsw = new hnswlib::HierarchicalNSW<float>("M20_ef200.hnsw");
+    hnswlib::HierarchicalNSW<float>* alg_hnsw = new hnswlib::HierarchicalNSW<float>("../test/sparse-small_M16_ef200.hnsw");
     alg_hnsw->dataset = &dataset;
     alg_hnsw->queries = &queries;
     // alg_hnsw->nz_count = getNzCount(alg_hnsw->dataset);
@@ -46,6 +46,7 @@ int main() {
         float num = 0;
         while (!tmp.empty()) {
             for (size_t j = 0; j < 10; j++) {
+                // std::cout<<tmp.top().second<<" ";
                 if (gt[i * 10 + j] == tmp.top().second) {
                     num++;
                     break;

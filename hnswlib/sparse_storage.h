@@ -18,11 +18,11 @@ struct SparseStorage {
           indices(indices),
           data(data) {}
     
-    ~SparseStorage() {
-        delete[] indptr;
-        delete[] indices;
-        delete[] data;
-    }
+    // ~SparseStorage() {
+    //     delete[] indptr;
+    //     delete[] indices;
+    //     delete[] data;
+    // }
 };
 // 行指针指的是每一行的第一个元素的起始位置
 float inner_prod(SparseStorage* ss1, size_t id1, SparseStorage* ss2, size_t id2) {
